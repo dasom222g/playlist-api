@@ -39,6 +39,15 @@ def crawl_melon_chart():
                 title_tag = row.select_one(".ellipsis.rank01 a")
                 title = title_tag.text.strip() if title_tag else "정보 없음"
 
+                # 아티스트 추출
+                artist_tags = row.select(".ellipsis.rank02 > a")
+                if artist_tags:
+                    # 여러 아티스트가 있을 경우 쉼표로 연결
+                    artists = [tag.text.strip() for tag in artist_tags]
+                    artist = ", ".join(artists)
+                else:
+                    artist = "정보 없음"
+
                 # 앨범명 추출
                 album_tag = row.select_one(".ellipsis.rank03 a")
                 album = album_tag.text.strip() if album_tag else "정보 없음"
@@ -47,6 +56,7 @@ def crawl_melon_chart():
                 song_info = {
                     "rank": int(rank) if rank.isdigit() else 0,
                     "title": title,
+                    "artist": artist,
                     "album": album,
                 }
 

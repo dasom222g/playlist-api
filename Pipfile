@@ -5,11 +5,11 @@ name = "pypi"
 
 [packages]
 fastapi = "*"
-uvicorn = "*"
 pydantic = "*"
 requests = "*"
 beautifulsoup4 = "*"
 lxml = "*"
+uvicorn = "*"
 
 [dev-packages]
 

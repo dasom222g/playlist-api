@@ -31,6 +31,9 @@ def crawl_melon_chart():
 
         for row in song_rows:
             try:
+                # 노래 ID추출
+                id = row.get("data-song-no")
+
                 # 순위 추출
                 rank_tag = row.select_one(".rank")
                 rank = rank_tag.text.strip()
@@ -53,7 +56,9 @@ def crawl_melon_chart():
                 album = album_tag.text.strip() if album_tag else "정보 없음"
 
                 # 데이터 저장
+                # isdigit: 문자열이 10진수로 변환되는 숫자인지 판별
                 song_info = {
+                    "id": int(id) if id.isdigit() else 0,
                     "rank": int(rank) if rank.isdigit() else 0,
                     "title": title,
                     "artist": artist,
